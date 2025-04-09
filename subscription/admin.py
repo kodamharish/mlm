@@ -3,3 +3,4 @@ from .models import *
 # Register your models here.
 admin.site.register(Subscription)
 admin.site.register(SubscriptionPlan)
+admin.site.register(SubscriptionPlanVariant)
