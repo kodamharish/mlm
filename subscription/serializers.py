@@ -32,7 +32,7 @@ class SubscriptionPlanVariantSerializer(serializers.ModelSerializer):
         model = SubscriptionPlanVariant
         fields = [
             'variant_id',
-            'plan',            # FK: SubscriptionPlan ID
+            'plan_id',            # FK: SubscriptionPlan ID
             'plan_name',       # Read-only
             'duration_in_days',
             'price',
@@ -59,7 +59,13 @@ class SubscriptionSerializer(serializers.ModelSerializer):
             'subscription_variant',
             'plan_name',
             'duration_in_days',
-            'subscription_date',
+            'subscription_status',
             'subscription_start_date',
             'subscription_end_date'
         ]
+        extra_kwargs = {
+            'subscription_end_date': {'read_only': True},  # <- Don't accept in payload
+            'subscription_start_date': {'read_only': True},  # Optional
+        }
+
+    

@@ -118,7 +118,7 @@ class SubscriptionPlanListCreateView(APIView):
 # List and Create Plan Variants (e.g., Connect+ 45 days, Connect+ 90 days)
 class SubscriptionPlanVariantListCreateView(APIView):
     def get(self, request):
-        variants = SubscriptionPlanVariant.objects.select_related("plan").all()
+        variants = SubscriptionPlanVariant.objects.select_related("plan_id").all()
         serializer = SubscriptionPlanVariantSerializer(variants, many=True)
         return Response(serializer.data)
 

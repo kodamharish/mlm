@@ -60,6 +60,10 @@ MIDDLEWARE = [
 
 ]
 
+
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True  
+
 ROOT_URLCONF = 'mlm.urls'
 
 TEMPLATES = [
