@@ -32,14 +32,21 @@ from users.models import *
 from django.db import models
 from users.models import User
 
+# Choices for subscription plan user types
+PLAN_USER_TYPE_CHOICES = (
+    ('Agent', 'Agent'),
+    ('Client', 'Client'),
+)
+
 
 class SubscriptionPlan(models.Model):
     plan_id = models.AutoField(primary_key=True)
     plan_name = models.CharField(max_length=100, unique=True)  # e.g., Sachet, Connect, Connect+, Relax
     description = models.TextField(blank=True, null=True)  # General plan description
+    user_type = models.CharField(max_length=20, choices=PLAN_USER_TYPE_CHOICES)  # NEW FIELD
 
     def __str__(self):
-        return self.plan_name
+        return f"{self.plan_name} ({self.user_type})"
 
 
 class SubscriptionPlanVariant(models.Model):

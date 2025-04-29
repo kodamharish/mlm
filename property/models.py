@@ -1,19 +1,3 @@
-# from django.db import models
-# from decimal import Decimal
-# import os
-
-# def property_image_upload_path(instance, filename):
-#     """
-#     Generate a dynamic file path for storing property images.
-#     Images will be stored under 'property/{property_type}/filename.ext'
-#     """
-#     property_type_folder = instance.property_type.lower().replace(" ", "_")  # Convert to lowercase & replace spaces
-#     return os.path.join(f"property/{property_type_folder}/", filename)  
-
-
-
-
-
 
 from django.db import models
 from users.models import *
@@ -65,18 +49,19 @@ class Property(models.Model):
 
 
     # Basic Info
-    looking_to = models.CharField(max_length=10, choices=LOOKING_TO_CHOICES)
+    looking_to = models.CharField(max_length=10, choices=LOOKING_TO_CHOICES,blank=True,null=True)
     category = models.ForeignKey('PropertyCategory', on_delete=models.SET_NULL, null=True)
     property_type = models.ForeignKey('PropertyType', on_delete=models.SET_NULL, null=True)
     property_title = models.CharField(max_length=200, null=True, blank=True)
+
     description = models.TextField(blank=True, null=True)
 
     # Location Details
     address = models.TextField(blank=True, null=True)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
-    pin_code = models.CharField(max_length=15)
+    city = models.CharField(max_length=100,blank=True, null=True)
+    state = models.CharField(max_length=100,blank=True, null=True)
+    country = models.CharField(max_length=100,blank=True, null=True)
+    pin_code = models.CharField(max_length=15,blank=True, null=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
 
@@ -90,6 +75,14 @@ class Property(models.Model):
     number_of_floors = models.PositiveIntegerField(blank=True, null=True)
     number_of_open_sides = models.PositiveIntegerField(blank=True, null=True)
     number_of_roads = models.PositiveIntegerField(blank=True, null=True)
+
+    number_of_bedrooms = models.PositiveIntegerField(blank=True, null=True)
+    number_of_balconies = models.PositiveIntegerField(blank=True, null=True)
+    number_of_bathrooms = models.PositiveIntegerField(blank=True, null=True)
+    availability_status  = models.CharField(max_length=200, null=True, blank=True)
+
+
+    
     road_width_1_ft = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     road_width_2_ft = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
 
@@ -141,12 +134,12 @@ import os
 
 def property_image_upload_to(instance, filename):
     user_id = instance.property.user_id.user_id
-    return f'media/{user_id}/images/{filename}'
+    return f'properties/{user_id}/images/{filename}'
 
 def property_video_upload_to(instance, filename):
     # user_id = instance.property.user.id
     user_id = instance.property.user_id.user_id
-    return f'media/{user_id}/videos/{filename}'
+    return f'properties/{user_id}/videos/{filename}'
 
 
 

@@ -21,7 +21,7 @@ from .models import SubscriptionPlan, SubscriptionPlanVariant, Subscription
 class SubscriptionPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubscriptionPlan
-        fields = ['plan_id', 'plan_name', 'description']
+        fields = ['plan_id', 'plan_name', 'description','user_type']
 
 
 # Serializer for creating and viewing specific plan variants (e.g., Connect+ 45 days)

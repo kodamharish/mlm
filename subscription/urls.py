@@ -26,10 +26,15 @@ urlpatterns = [
     path('subscription/plan-variants/<int:pk>/', SubscriptionPlanVariantDetailView.as_view(), name='plan-variant-detail'),
 
     # Subscriptions
-    path('subscribe/', SubscribeUserView.as_view(), name='subscribe-user'),
+    path('subscriptions/', SubscriptionListCreateView.as_view(), name='subscribe-user'),
     path('subscriptions/<int:pk>/', SubscriptionDetailView.as_view(), name='subscription-detail'),
+
     path('user-subscriptions/<int:user_id>/', UserSubscriptionsView.as_view(), name='user-subscriptions'),
+    path('subscription/plans/<str:user_type>/', SubscriptionPlanByUserTypeView.as_view(), name='subscription-plan-by-user-type'),
+    path('subscription/plan-variants/<str:user_type>/', SubscriptionPlanVariantByUserTypeView.as_view(), name='subscription-plan-variant-by-user-type'),
 ]
+
+
 
 
 
