@@ -109,6 +109,8 @@ class Property(models.Model):
    
     # User
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties')
+    referral_id = models.CharField(max_length=20, blank=True, null=True)
+
 
     # Flags
     is_featured = models.BooleanField(default=False)

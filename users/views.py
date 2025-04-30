@@ -27,6 +27,12 @@ class LoginAPIView(APIView):
                     {
                         "message": "Login successful",
                         "user_id": user.user_id,
+                        "referral_id":user.referral_id,
+                        "referred_by": user.referred_by,
+                        "first_name":user.first_name,
+                        "last_name": user.last_name,
+                        "email": user.email,
+                        "phone_number": user.phone_number,
                         "roles": list(roles),  # Convert QuerySet to list
                     },
                     status=status.HTTP_200_OK
